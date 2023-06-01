@@ -1,0 +1,54 @@
+<mxfile host="app.diagrams.net" modified="2023-06-01T11:36:54.049Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0" etag="PLpBuoOcChA5L0DSPABq" version="21.3.6" type="device">
+  <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
+    <mxGraphModel dx="989" dy="528" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Функц. возможность 1" style="swimlane;whiteSpace=wrap" parent="1" vertex="1">
+          <mxGeometry x="310" y="120" width="280" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="" style="ellipse;shape=startState;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="2" vertex="1">
+          <mxGeometry x="110" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#2D7600;endFill=1;rounded=0;fillColor=#60a917;" parent="2" source="5" target="7" edge="1">
+          <mxGeometry x="100" y="40" as="geometry">
+            <mxPoint x="115" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7" value="Программа запускается" style="fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="2" vertex="1">
+          <mxGeometry x="60" y="110" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-A9D6HdiChE-BO2MNw-I-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#60a917;strokeColor=#2D7600;" parent="2" source="8" target="10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Создается класс игры" style="fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="2" vertex="1">
+          <mxGeometry x="60" y="172" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="" style="endArrow=open;strokeColor=#2D7600;endFill=1;rounded=0;fillColor=#60a917;" parent="2" source="7" target="8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-A9D6HdiChE-BO2MNw-I-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#60a917;strokeColor=#2D7600;" parent="2" source="10" target="-A9D6HdiChE-BO2MNw-I-44" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Вызывается метод&#xa;start_game&#xa;" style="fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="2" vertex="1">
+          <mxGeometry x="60" y="235" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-A9D6HdiChE-BO2MNw-I-47" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;" parent="2" source="-A9D6HdiChE-BO2MNw-I-44" target="-A9D6HdiChE-BO2MNw-I-46" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-A9D6HdiChE-BO2MNw-I-44" value="Создается поле,&#xa;генерируется лабиринт&#xa;при помощи метода &#xa;create_labyrint&#xa;" style="fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="2" vertex="1">
+          <mxGeometry x="50" y="302" width="150" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="-A9D6HdiChE-BO2MNw-I-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#60a917;strokeColor=#2D7600;" parent="2" source="-A9D6HdiChE-BO2MNw-I-46" target="38" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-A9D6HdiChE-BO2MNw-I-46" value="Отрисовывается&#xa;поле&#xa;" style="fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="2" vertex="1">
+          <mxGeometry x="60" y="390" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="38" value="" style="ellipse;shape=endState;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="2" vertex="1">
+          <mxGeometry x="110" y="472" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

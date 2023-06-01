@@ -1,0 +1,71 @@
+<mxfile host="app.diagrams.net" modified="2023-06-01T11:35:24.714Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0" etag="tT_Zy_py01p4Lqck1t5A" version="21.3.6" type="device">
+  <diagram name="Page-1" id="yoaGhc3lwo8dfpdE4m7b">
+    <mxGraphModel dx="683" dy="365" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-1" value="Функц. возможность 2" style="swimlane;whiteSpace=wrap" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="355" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-2" value="" style="ellipse;shape=startState;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="90" y="40" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-3" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#2D7600;endFill=1;rounded=0;fillColor=#60a917;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-2" target="PuLr-hCjjIu2wN2KxeC7-4">
+          <mxGeometry x="70" y="20" as="geometry">
+            <mxPoint x="85" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-4" value="Выводятся&#xa;возможные&#xa;варианты&#xa;сложности&#xa;" style="direction=west;align=center;verticalAlign=middle;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="50" y="90" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-5" value="Запрашивается&#xa;решение&#xa;пользователя&#xa;" style="fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="50" y="182" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-6" value="" style="endArrow=open;strokeColor=#2D7600;endFill=1;rounded=0;fillColor=#60a917;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-4" target="PuLr-hCjjIu2wN2KxeC7-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-7" value="&lt;div&gt;no&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-8" target="PuLr-hCjjIu2wN2KxeC7-14">
+          <mxGeometry x="-0.5" y="9" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="280" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-8" value="input.isdigit()&#xa; and&#xa; (1 &lt;= input &lt;= 3)" style="rhombus;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;whiteSpace=wrap;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="30" y="246" width="150" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-10" value="" style="endArrow=open;strokeColor=#2D7600;endFill=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#60a917;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-5" target="PuLr-hCjjIu2wN2KxeC7-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105.00000000000023" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-12" value="Установить соответствующие&#xa;показатели ширины и высоты поля&#xa;" style="whiteSpace=wrap;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="21.25" y="360" width="167.5" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.414;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#60a917;strokeColor=#2D7600;" edge="1" parent="PuLr-hCjjIu2wN2KxeC7-1" source="PuLr-hCjjIu2wN2KxeC7-14" target="PuLr-hCjjIu2wN2KxeC7-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="225" y="202" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="225" y="203" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-14" value="Вывести информацию об ошибке" style="whiteSpace=wrap;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="202.5" y="256" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="PuLr-hCjjIu2wN2KxeC7-15" value="" style="ellipse;shape=endState;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="PuLr-hCjjIu2wN2KxeC7-1">
+          <mxGeometry x="90" y="460" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
