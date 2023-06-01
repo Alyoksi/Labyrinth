@@ -13,8 +13,8 @@ class Game:
         self.wwidth = width_window
         self.wheight = height_window
 
-        self.font = pg.font.Font(None, 25)
-        #self.font = pg.font.Font(pg.font.get_default_font(), 25)
+        self.font = pg.font.Font("fonts/FiraCodeNerdFont-Regular.ttf", 15)
+        #self.font = pg.font.Font(None, 25)
 
         self.start_time = 0
         self.time = 0
@@ -22,7 +22,8 @@ class Game:
         self.score = 0
         self.record_time = 9999
 
-        self.info = True  # нижняя панель
+        self.game_on = True
+        self.lost = False
 
         self.reach_matrix = []
         self.transition_matrix = []
@@ -148,9 +149,6 @@ class Game:
             # создаем потенциально следующую точку
             x, y, tx, ty = self.transition_choice(x, y, self.reach_matrix)
 
-        # возвращаем матрицу переходов, начальную и конечную точки
-        #return self.reach_matrix, self.start, self.finish
-
     # параметры: матрица переходов, начало, конец, толщина проходов, стен, цвет проходов, стен,
     # толщина границы лабиринта, цвет начальной точки, конечной точки
 
@@ -191,17 +189,9 @@ class Game:
             width_line))
 
     def draw_score(self):
-        text1 = self.font.render("Пройдено лабиринтов: " + str(self.score), True, (255, 255, 255))
-        self.window.blit(text1, [5, self.wheight - 65])
-        pg.draw.rect(self.window, (0, 0, 0), (5, self.wheight - 40, self.wwidth, 20))
+        pg.draw.rect(self.window, (0, 0, 0), (0, self.wheight-25, self.wwidth, 25))
         text2 = self.font.render("Время: " + str(int(self.time)), True, (255, 255, 255))
-        self.window.blit(text2, [5, self.wheight - 40])
-        if self.record_time == 9999:
-            text3 = self.font.render("Рекордное время: " + str(0), True, (255, 255, 255))
-            self.window.blit(text3, [5, self.wheight - 20])
-        else:
-            text3 = self.font.render("Рекордное время: " + str(int(self.record_time)), True, (255, 255, 255))
-            self.window.blit(text3, [5, self.wheight - 20])
+        self.window.blit(text2, [5, self.wheight - 20])
 
     def delete_player(self):
         """Функция удаления игрока при движении и оставления следов"""
@@ -211,6 +201,11 @@ class Game:
                                (border + player[0] * (width_line + width_walls) + width_line // 2,
                                 border + player[1] * (width_line + width_walls) + width_line // 2),
                                width_line // 2 - 3)
+        elif (player[0], player[1]) == self.finish:
+            pg.draw.circle(self.window, color_finish,
+                           (border + player[0] * (width_line + width_walls) + width_line // 2,
+                            border + player[1] * (width_line + width_walls) + width_line // 2),
+                           width_line // 2 - 3)
         else:
             pg.draw.circle(self.window, color_way,
                                (border + player[0] * (width_line + width_walls) + width_line // 2,
@@ -283,25 +278,5 @@ class Game:
         self.draw_labyrinth()
         self.draw_player()
 
-    def start_new_game(self):
-        self.window.fill((0, 0, 0))
-        self.score += 1
-        if self.time < self.record_time:
-            self.record_time = self.time
-        self.start_time = time.time()
-        pg.draw.rect(self.window, (0, 0, 0), (0, self.wheight - 70, self.wwidth, 70))
-
-        self.create_labyrinth()
-        k = 0
-        while self.transition_matrix in self.matrix_base or self.start[0] == self.finish[0] \
-                or self.start[1] == self.finish[1]:
-            self.create_labyrinth()
-            k += 1
-            if k > 20:
-                print('Не найдено лабиринтов без повторения')
-                break
-        self.matrix_base.append(self.transition_matrix)
-        self.player = list(self.start)
-        self.draw_labyrinth()
-        self.draw_player()
-        
+    def show_path(self):
+        pass
