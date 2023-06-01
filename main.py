@@ -15,7 +15,6 @@ window = pg.display.set_mode((width_window, height_window))
 pg.display.set_caption("Лабиринт")
 
 game = Game(width, height, window, width_window, height_window)
-
 game.start_game()
 
 flag_game = True
