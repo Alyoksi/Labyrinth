@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2023-06-01T09:24:45.154Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0" etag="N6CO9A2iCl1DUzh8sOYm" version="21.3.6" type="device">
+  <diagram name="Page-1" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
+    <mxGraphModel dx="989" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3" value="Class diagram" style="swimlane;whiteSpace=wrap" parent="1" vertex="1">
+          <mxGeometry x="277" y="128" width="615.5" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="CN2PKZ3N-3mVP35vAMMj-41" value="Game" style="whiteSpace=wrap;" vertex="1" parent="3">
+          <mxGeometry x="243" y="32" width="127" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CN2PKZ3N-3mVP35vAMMj-42" value="-n&#xa;-m&#xa;-wwidth&#xa;-wheight&#xa;-font&#xa;-start_time&#xa;-time&#xa;+game_on&#xa;+lost&#xa;-reach_matrix&#xa;-transition_matrix&#xa;-matrix_base&#xa;-window&#xa;+start&#xa;+finish&#xa;+player&#xa;-trace" style="whiteSpace=wrap;align=left;" vertex="1" parent="3">
+          <mxGeometry x="243" y="50" width="127" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="CN2PKZ3N-3mVP35vAMMj-43" value="-start_point_generate&#xa;-finish_point_generate&#xa;-transition_choice(x,y : int, reach_matrix : list)&#xa;+create_labyrinth&#xa;+draw_labyrinth&#xa;+draw_score&#xa;+delete_player&#xa;+draw_player&#xa;+tick&#xa;+click_RIGHT&#xa;+click_LEFT&#xa;+click_DOWN&#xa;+click_UP&#xa;+setting_trace&#xa;+start_game&#xa;+show_path" style="whiteSpace=wrap;align=left;direction=west;" vertex="1" parent="3">
+          <mxGeometry x="243" y="300" width="127" height="250" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

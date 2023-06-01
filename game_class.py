@@ -7,58 +7,54 @@ from constants import *
 class Game:
 
     def __init__(self, width, height, window, width_window, height_window):
-        self.n = width
-        self.m = height
+        self.__n = width
+        self.__m = height
 
-        self.wwidth = width_window
-        self.wheight = height_window
+        self.__wwidth = width_window
+        self.__wheight = height_window
 
-        self.font = pg.font.Font("fonts/FiraCodeNerdFont-Regular.ttf", 15)
-        #self.font = pg.font.Font(None, 25)
+        self.__font = pg.font.Font("fonts/FiraCodeNerdFont-Regular.ttf", 15)
 
-        self.start_time = 0
-        self.time = 0
-
-        self.score = 0
-        self.record_time = 9999
+        self.__start_time = 0
+        self.__time = 0
 
         self.game_on = True
         self.lost = False
 
-        self.reach_matrix = []
-        self.transition_matrix = []
-        self.matrix_base = []
+        self.__reach_matrix = []
+        self.__transition_matrix = []
+        self.__matrix_base = []
 
-        self.window = window
+        self.__window = window
 
         self.start = ()
         self.finish = ()
 
         self.player = []
-        self.trace = False
+        self.__trace = False
 
-    def start_point_generate(self):
+    def __start_point_generate(self):
         """Функция выбора точки начала лабиринта"""
 
         # Если True, то рандомим y, иначе x
         if random.choice([True, False]):
             if random.choice([True, False]):
-                game_start = (0, random.randint(0, self.m - 1))
+                game_start = (0, random.randint(0, self.__m - 1))
             else:
-                game_start = (self.n - 1, random.randint(0, self.m - 1))
+                game_start = (self.__n - 1, random.randint(0, self.__m - 1))
         else:
             if random.choice([True, False]):
-                game_start = (random.randint(0, self.n - 1), 0)
+                game_start = (random.randint(0, self.__n - 1), 0)
             else:
-                game_start = (random.randint(0, self.n - 1), self.m - 1)
+                game_start = (random.randint(0, self.__n - 1), self.__m - 1)
 
         return game_start
 
-    def finish_point_generate(self):
+    def __finish_point_generate(self):
         """Выбор точки конца лабиринта"""
-        return self.n - 1 - self.start[0], self.m - 1 - self.start[1]
+        return self.__n - 1 - self.start[0], self.__m - 1 - self.start[1]
 
-    def transition_choice(self, x, y, reach_matrix):
+    def __transition_choice(self, x, y, reach_matrix):
         """Функция выбора дальнейшего пути в генерации лабиринта"""
 
         # Создаем массив точек, в которые можем перейти
@@ -98,24 +94,24 @@ class Game:
 
     def create_labyrinth(self):
         """Генерация лабиринта"""
-        n = self.n
-        m = self.m
+        n = self.__n
+        m = self.__m
         # создаем начальную матрицу достижимости ячеек
-        self.reach_matrix = []
+        self.__reach_matrix = []
         for i in range(n):
-            self.reach_matrix.append([])
+            self.__reach_matrix.append([])
             for j in range(m):
-                self.reach_matrix[i].append(False)
+                self.__reach_matrix[i].append(False)
 
-        self.transition_matrix = []
+        self.__transition_matrix = []
         # начальное заполнение матрицы переходов
         for i in range(n * 2 - 1):
-            self.transition_matrix.append([])
+            self.__transition_matrix.append([])
             for j in range(m * 2 - 1):
                 if i % 2 == 0 and j % 2 == 0:
-                    self.transition_matrix[i].append(True)
+                    self.__transition_matrix[i].append(True)
                 else:
-                    self.transition_matrix[i].append(False)
+                    self.__transition_matrix[i].append(False)
         # print("Hi")
         # for j in range(len(self.transition_matrix)):
         #     for k in range(len(self.transition_matrix[j])):
@@ -124,37 +120,37 @@ class Game:
         # print("Bye")
 
         # генерируем стартовую и финишную точки
-        self.start = self.start_point_generate()
-        self.finish = self.finish_point_generate()
+        self.start = self.__start_point_generate()
+        self.finish = self.__finish_point_generate()
 
         # создаем маршрутный список, который хранит путь, по которому мы прошли,
         # чтобы в случае тупика мы смогли вернуться
         list_transition = [self.start]
         x, y = self.start
-        self.reach_matrix[x][y] = True
-        x, y, tx, ty = self.transition_choice(x, y, self.reach_matrix)
+        self.__reach_matrix[x][y] = True
+        x, y, tx, ty = self.__transition_choice(x, y, self.__reach_matrix)
         for i in range(1, m * n):
             while not (x >= 0 and y >= 0):
                 # если зашли в тупик, то возвращаемся
                 x, y = list_transition[-1]
                 list_transition.pop()
                 # перегенерируем следующую точку
-                x, y, tx, ty = self.transition_choice(x, y, self.reach_matrix)
+                x, y, tx, ty = self.__transition_choice(x, y, self.__reach_matrix)
 
             # отмечаем, что точка подошла
-            self.reach_matrix[x][y] = True
+            self.__reach_matrix[x][y] = True
             list_transition.append((x, y))
-            self.transition_matrix[tx][ty] = True
+            self.__transition_matrix[tx][ty] = True
 
             # создаем потенциально следующую точку
-            x, y, tx, ty = self.transition_choice(x, y, self.reach_matrix)
+            x, y, tx, ty = self.__transition_choice(x, y, self.__reach_matrix)
 
     # параметры: матрица переходов, начало, конец, толщина проходов, стен, цвет проходов, стен,
     # толщина границы лабиринта, цвет начальной точки, конечной точки
 
     def draw_labyrinth(self):
         """Рисование лабиринта"""
-        matrix = self.transition_matrix
+        matrix = self.__transition_matrix
         width = (len(matrix) // 2 + 1) * width_line + (len(matrix) // 2) * width_walls + border * 2
         height = (len(matrix[0]) // 2 + 1) * width_line + (len(matrix[0]) // 2) * width_walls + border * 2
 
@@ -162,7 +158,7 @@ class Game:
         for i in range(width):
             for j in range(height):
                 if i < border or width - i <= border or j < border or height - j <= border:
-                    pg.draw.line(self.window, color_wall, [i, j], [i, j], 1)
+                    pg.draw.line(self.__window, color_wall, [i, j], [i, j], 1)
                 else:
                     if (i - border) % (width_line + width_walls) <= width_line:
                         x = (i - border) // (width_line + width_walls) * 2
@@ -173,99 +169,99 @@ class Game:
                     else:
                         y = (j - border) // (width_line + width_walls) * 2 + 1
                     if matrix[x][y]:
-                        pg.draw.line(self.window, color_way, [i, j], [i, j], 1)
+                        pg.draw.line(self.__window, color_way, [i, j], [i, j], 1)
                     else:
-                        pg.draw.line(self.window, color_wall, [i, j], [i, j], 1)
+                        pg.draw.line(self.__window, color_wall, [i, j], [i, j], 1)
 
         # рисуем место старта
-        pg.draw.rect(self.window, color_start, (
+        pg.draw.rect(self.__window, color_start, (
             border + self.start[0] * (width_line + width_walls), border + self.start[1] * (width_line + width_walls), width_line,
             width_line))
 
         # рисуем место финиша
-        pg.draw.rect(self.window, color_finish, (
+        pg.draw.rect(self.__window, color_finish, (
             border + self.finish[0] * (width_line + width_walls), border + self.finish[1] * (width_line + width_walls),
             width_line,
             width_line))
 
     def draw_score(self):
-        pg.draw.rect(self.window, (0, 0, 0), (0, self.wheight-25, self.wwidth, 25))
-        text2 = self.font.render("Время: " + str(int(self.time)), True, (255, 255, 255))
-        self.window.blit(text2, [5, self.wheight - 20])
+        pg.draw.rect(self.__window, (0, 0, 0), (0, self.__wheight - 25, self.__wwidth, 25))
+        text2 = self.__font.render("Время: " + str(int(self.__time)), True, (255, 255, 255))
+        self.__window.blit(text2, [5, self.__wheight - 20])
 
     def delete_player(self):
         """Функция удаления игрока при движении и оставления следов"""
         player = self.player
         if (player[0], player[1]) == self.start:
-            pg.draw.circle(self.window, color_start,
-                               (border + player[0] * (width_line + width_walls) + width_line // 2,
+            pg.draw.circle(self.__window, color_start,
+                           (border + player[0] * (width_line + width_walls) + width_line // 2,
                                 border + player[1] * (width_line + width_walls) + width_line // 2),
-                               width_line // 2 - 3)
+                           width_line // 2 - 3)
         elif (player[0], player[1]) == self.finish:
-            pg.draw.circle(self.window, color_finish,
+            pg.draw.circle(self.__window, color_finish,
                            (border + player[0] * (width_line + width_walls) + width_line // 2,
                             border + player[1] * (width_line + width_walls) + width_line // 2),
                            width_line // 2 - 3)
         else:
-            pg.draw.circle(self.window, color_way,
-                               (border + player[0] * (width_line + width_walls) + width_line // 2,
+            pg.draw.circle(self.__window, color_way,
+                           (border + player[0] * (width_line + width_walls) + width_line // 2,
                                 border + player[1] * (width_line + width_walls) + width_line // 2),
-                               width_line // 2 - 3)
-        if self.trace:
-            pg.draw.circle(self.window, color_trace,
-                               (border + player[0] * (width_line + width_walls) + width_line // 2,
+                           width_line // 2 - 3)
+        if self.__trace:
+            pg.draw.circle(self.__window, color_trace,
+                           (border + player[0] * (width_line + width_walls) + width_line // 2,
                                 border + player[1] * (width_line + width_walls) + width_line // 2),
-                               width_line // 3 - 3)
+                           width_line // 3 - 3)
 
     def draw_player(self):
         """Отрисовка игрока на экране"""
-        pg.draw.circle(self.window, color_player,
-                           (border + self.player[0] * (width_line + width_walls) + width_line // 2,
+        pg.draw.circle(self.__window, color_player,
+                       (border + self.player[0] * (width_line + width_walls) + width_line // 2,
                             border + self.player[1] * (width_line + width_walls) + width_line // 2),
-                           width_line // 2 - 3)
+                       width_line // 2 - 3)
 
     def tick(self):
         """Cекудномер"""
-        self.time = time.time() - self.start_time
+        self.__time = time.time() - self.__start_time
 
     def click_RIGHT(self):
         """Движение вправо"""
-        if len(self.transition_matrix) > self.player[0] * 2 + 2:
-            if self.transition_matrix[self.player[0] * 2 + 1][self.player[1] * 2]:
+        if len(self.__transition_matrix) > self.player[0] * 2 + 2:
+            if self.__transition_matrix[self.player[0] * 2 + 1][self.player[1] * 2]:
                 self.player[0] += 1
 
     def click_LEFT(self):
         """Движение влево"""
         if -1 < self.player[0] * 2 - 2:
-            if self.transition_matrix[self.player[0] * 2 - 1][self.player[1] * 2]:
+            if self.__transition_matrix[self.player[0] * 2 - 1][self.player[1] * 2]:
                 self.player[0] -= 1
 
     def click_DOWN(self):
         """Движение вниз"""
-        if len(self.transition_matrix[0]) > self.player[1] * 2 + 2:
-            if self.transition_matrix[self.player[0] * 2][self.player[1] * 2 + 1]:
+        if len(self.__transition_matrix[0]) > self.player[1] * 2 + 2:
+            if self.__transition_matrix[self.player[0] * 2][self.player[1] * 2 + 1]:
                 self.player[1] += 1
 
     def click_UP(self):
         """Движение вверх"""
         if -1 < self.player[1] * 2 - 2:
-            if self.transition_matrix[self.player[0] * 2][self.player[1] * 2 - 1]:
+            if self.__transition_matrix[self.player[0] * 2][self.player[1] * 2 - 1]:
                 self.player[1] -= 1
 
     def setting_trace(self):
         """Изменение флага оставления следов"""
-        if self.trace:
-            self.trace = False
+        if self.__trace:
+            self.__trace = False
         else:
-            self.trace = True
+            self.__trace = True
 
     def start_game(self):
-        self.window.fill((0, 0, 0))
-        self.start_time = time.time()
-        pg.draw.rect(self.window, (0, 0, 0), (0, self.wheight - 70, self.wwidth, 70))
+        self.__window.fill((0, 0, 0))
+        self.__start_time = time.time()
+        pg.draw.rect(self.__window, (0, 0, 0), (0, self.__wheight - 70, self.__wwidth, 70))
         self.create_labyrinth()
         k = 0
-        while self.transition_matrix in self.matrix_base or self.start[0] == self.finish[0] \
+        while self.__transition_matrix in self.__matrix_base or self.start[0] == self.finish[0] \
                 or self.start[1] == self.finish[1]:
             self.create_labyrinth()
             k += 1
@@ -273,7 +269,7 @@ class Game:
                 print('Не найдено лабиринтов без повторения')
                 break
 
-        self.matrix_base.append(self.transition_matrix)
+        self.__matrix_base.append(self.__transition_matrix)
         self.player = list(self.start)
         self.draw_labyrinth()
         self.draw_player()

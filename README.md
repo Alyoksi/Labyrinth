@@ -33,3 +33,4 @@
 
 #### Ссылки на диаграммы:
 1. [Ссылка на UML Activity diagram](doc/UML%20Activity%20Diagram.drawio.png)
+2. [Ссылка на UML Class diagram](doc/Class.drawio.png)
