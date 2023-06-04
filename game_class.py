@@ -7,8 +7,8 @@ from constants import *
 class Game:
 
     def __init__(self, width, height, window, width_window, height_window):
-        self.__n = width
-        self.__m = height
+        self.__n = height
+        self.__m = width
 
         self.__wwidth = width_window
         self.__wheight = height_window
@@ -59,12 +59,16 @@ class Game:
 
         # Создаем массив точек, в которые можем перейти
         choice_list = []
+
+        # Если текущая точна не на краю справа или слева
         if x > 0:
             if not reach_matrix[x - 1][y]:
                 choice_list.append((x - 1, y))
         if x < len(reach_matrix) - 1:
             if not reach_matrix[x + 1][y]:
                 choice_list.append((x + 1, y))
+
+        # Если текущая точна не на краю сверху или снизу
         if y > 0:
             if not reach_matrix[x][y - 1]:
                 choice_list.append((x, y - 1))
@@ -72,20 +76,28 @@ class Game:
             if not reach_matrix[x][y + 1]:
                 choice_list.append((x, y + 1))
 
-        # Из созданного списка случайно выбираем точку, в которую пойдем,
-        # иначе возвращаем несуществующую точку
+        # Если список возможных точек не пустой
         if choice_list:
+            # Выбираем случайно точку, в которую пойдем
             nx, ny = random.choice(choice_list)
+            tx, ty = -1, -1
+            # переделываем координаты точки для м.п.
             if x == nx:
+                # Если новая точка ниже
                 if ny > y:
-                    tx, ty = x * 2, ny * 2 - 1
+                    tx, ty = nx * 2, ny * 2 - 1
+                # Если новая точка выше
                 else:
-                    tx, ty = x * 2, ny * 2 + 1
-            else:
+                    tx, ty = nx * 2, ny * 2 + 1
+            elif y == ny:
+                # Если новая точка правее
                 if nx > x:
-                    tx, ty = nx * 2 - 1, y * 2
+                    tx, ty = nx * 2 - 1, ny * 2
+                # Если новая точка левее
                 else:
-                    tx, ty = nx * 2 + 1, y * 2
+                    tx, ty = nx * 2 + 1, ny * 2
+            # другого исхода быть не могло
+
             # nx, ny - координаты в матрице достижимости
             # tx, ty - координаты в матрице перехода
             return nx, ny, tx, ty
@@ -112,12 +124,6 @@ class Game:
                     self.__transition_matrix[i].append(True)
                 else:
                     self.__transition_matrix[i].append(False)
-        # print("Hi")
-        # for j in range(len(self.transition_matrix)):
-        #     for k in range(len(self.transition_matrix[j])):
-        #         print(self.transition_matrix[j][k], end=' ')
-        #     print()
-        # print("Bye")
 
         # генерируем стартовую и финишную точки
         self.start = self.__start_point_generate()
@@ -129,9 +135,11 @@ class Game:
         x, y = self.start
         self.__reach_matrix[x][y] = True
         x, y, tx, ty = self.__transition_choice(x, y, self.__reach_matrix)
-        for i in range(1, m * n):
+        for i in range(1, n*m):
+            # Если метод __transition_choice вернул -1,-1,-1,-1,
+            # т.е. не нашел точек для продолжения
             while not (x >= 0 and y >= 0):
-                # если зашли в тупик, то возвращаемся
+                # возвращаемся
                 x, y = list_transition[-1]
                 list_transition.pop()
                 # перегенерируем следующую точку
@@ -145,29 +153,31 @@ class Game:
             # создаем потенциально следующую точку
             x, y, tx, ty = self.__transition_choice(x, y, self.__reach_matrix)
 
-    # параметры: матрица переходов, начало, конец, толщина проходов, стен, цвет проходов, стен,
-    # толщина границы лабиринта, цвет начальной точки, конечной точки
+        # for i in range(len(self.__transition_matrix)):
+        #     for j in range(len(self.__transition_matrix[i])):
+        #         print(int(self.__transition_matrix[i][j]), end=' ')
+        #     print()
 
     def draw_labyrinth(self):
         """Рисование лабиринта"""
         matrix = self.__transition_matrix
-        width = (len(matrix) // 2 + 1) * width_line + (len(matrix) // 2) * width_walls + border * 2
+        width = (len(matrix) // 2+1) * width_line + (len(matrix) // 2) * width_walls + border * 2
         height = (len(matrix[0]) // 2 + 1) * width_line + (len(matrix[0]) // 2) * width_walls + border * 2
-
+        print(width, height)
         # рисуем границы лабиринта
-        for i in range(width):
-            for j in range(height):
-                if i < border or width - i <= border or j < border or height - j <= border:
+        for i in range(height):
+            for j in range(width):
+                if j < border or width - j <= border or i < border or height - i <= border:
                     pg.draw.line(self.__window, color_wall, [i, j], [i, j], 1)
                 else:
-                    if (i - border) % (width_line + width_walls) <= width_line:
-                        x = (i - border) // (width_line + width_walls) * 2
-                    else:
-                        x = (i - border) // (width_line + width_walls) * 2 + 1
                     if (j - border) % (width_line + width_walls) <= width_line:
-                        y = (j - border) // (width_line + width_walls) * 2
+                        x = (j - border) // (width_line + width_walls) * 2
                     else:
-                        y = (j - border) // (width_line + width_walls) * 2 + 1
+                        x = (j - border) // (width_line + width_walls) * 2 + 1
+                    if (i - border) % (width_line + width_walls) <= width_line:
+                        y = (i - border) // (width_line + width_walls) * 2
+                    else:
+                        y = (i - border) // (width_line + width_walls) * 2 + 1
                     if matrix[x][y]:
                         pg.draw.line(self.__window, color_way, [i, j], [i, j], 1)
                     else:
@@ -175,14 +185,13 @@ class Game:
 
         # рисуем место старта
         pg.draw.rect(self.__window, color_start, (
-            border + self.start[0] * (width_line + width_walls), border + self.start[1] * (width_line + width_walls), width_line,
-            width_line))
+            border + self.start[0] * (width_line + width_walls), border + self.start[1] * (width_line + width_walls),
+            width_line, width_line))
 
         # рисуем место финиша
         pg.draw.rect(self.__window, color_finish, (
             border + self.finish[0] * (width_line + width_walls), border + self.finish[1] * (width_line + width_walls),
-            width_line,
-            width_line))
+            width_line, width_line))
 
     def draw_score(self):
         pg.draw.rect(self.__window, (0, 0, 0), (0, self.__wheight - 25, self.__wwidth, 25))

@@ -1,22 +1,46 @@
-from constants import *
-import pygame as pg
+import random
+from Constants import *
 
+def generate_start_point(cols, rows):
+    """Функция выбора точки начала лабиринта"""
+    # Если True, то рандомим y, иначе x
+    if random.choice([True, False]):
+        if random.choice([True, False]):
+            game_start = (0, random.randint(0, rows - 1))
+        else:
+            game_start = (cols - 1, random.randint(0, rows - 1))
+    else:
+        if random.choice([True, False]):
+            game_start = (random.randint(0, cols - 1), 0)
+        else:
+            game_start = (random.randint(0, cols - 1), rows - 1)
 
-def calc_width(width):
-    return ((width * 2 - 1) // 2 + 1) * width_line + ((width * 2 - 1) // 2) * width_walls + border * 2
+    return game_start
 
+def generate_finish_point(cols, rows, start):
+    """Выбор точки конца лабиринта"""
+    return cols - 1 - start[0], rows - 1 - start[1]
 
-def cacl_height(height):
-    return ((height * 2 - 1) // 2 + 1) * width_line + ((height * 2 - 1) // 2) * width_walls + border * 2
+def generate_human_start_finish(cols, rows):
+    human_start = generate_start_point(cols, rows)
+    human_finish = generate_finish_point(cols, rows, human_start)
+    return human_start, human_finish
 
+def generate_bot_start_finish(cols, rows, human_start, human_finish):
+    bot_start = generate_start_point(cols, rows)
+    bot_finish = generate_finish_point(cols, rows, bot_start)
+    while (bot_start == human_start or bot_start == human_finish) or \
+            (bot_finish == human_finish or bot_finish == human_start):
+        bot_start = generate_start_point(cols, rows)
+        bot_finish = generate_finish_point(cols, rows, bot_start)
+
+    return bot_start, bot_finish
 
 def input_diff():
-    width, height = (0, 0)
-
     print('''Выберите сложность:
-    1. Легкая (10 x 7)
-    2. Нормальная (20 x 15)
-    3. Сложная (30 x 20) ''')
+    1. Легкая (Ширина клетка - 150)
+    2. Нормальная (Ширина клетка - 100)
+    3. Сложная (Ширина клетка - 50) ''')
 
     diff = input("Введите только номер сложности: ")
     while not (diff.isdigit()) or not (1 <= int(diff) <= 3):
@@ -24,41 +48,22 @@ def input_diff():
         diff = input("Введите только номер сложности: ")
     diff = int(diff)
     if diff == 1:
-        width = 10
-        height = 7
+        return 150
     elif diff == 2:
-        width = 20
-        height = 15
+        return 100
     elif diff == 3:
-        width = 30
-        height = 20
+        return 50
 
-    return width, height
-
-
-def key_pressed(event, game):
-    # Движение
+def key_pressed(event, human, bot):
     if event.key == pg.K_RIGHT or event.key == pg.K_d:
-        game.click_RIGHT()
+        human.moveRIGHT()
+        bot.step_next()
     if event.key == pg.K_LEFT or event.key == pg.K_a:
-        game.click_LEFT()
+        human.moveLEFT()
+        bot.step_next()
     if event.key == pg.K_UP or event.key == pg.K_w:
-        game.click_UP()
+        human.moveUP()
+        bot.step_next()
     if event.key == pg.K_DOWN or event.key == pg.K_s:
-        game.click_DOWN()
-
-    # TODO: исправить README.md
-    if event.key == pg.K_e:
-        game.game_on = False
-        game.lost = True
-
-    # Запустить след
-    if event.key == pg.K_t:
-        game.setting_trace()
-    # Начать заново
-    if event.key == pg.K_r:
-        game.start_game()
-    # Возврат в начало
-    if event.key == pg.K_c:
-        game.player[0] = game.start[0]
-        game.player[1] = game.start[1]
+        human.moveDOWN()
+        bot.step_next()

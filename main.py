@@ -1,56 +1,63 @@
-import pygame as pg
 from extra_functions import *
-from game_class import Game
-
-
-width, height = input_diff()
-
-# Когда-нибудь сделать выбор сложности
-width_window = calc_width(width)
-height_window = cacl_height(height)
-height_window += 25  # место для времени
+from Classes import *
 
 pg.init()
-window = pg.display.set_mode((width_window, height_window))
-pg.display.set_caption("Лабиринт")
+sc = pg.display.set_mode(RES)
+sc.fill(pg.Color('darkslategray'))
 
-game = Game(width, height, window, width_window, height_window)
-game.start_game()
+clock = pg.time.Clock()
 
-flag_game = True
-while flag_game:  # основной игровой цикл
-    game.delete_player()
+# Creating players
+human_start, human_finish = generate_human_start_finish(cols, rows)
+bot_start, bot_finish = generate_bot_start_finish(cols, rows, human_start, human_finish)
+board, human, bot = create_game(sc, human_start, human_finish, bot_start, bot_finish)
 
-    if game.game_on:
-        if tuple(game.player) == game.finish:
-            game.game_on = False
+result = ''
+going = True
+running = True
+while running:
+    if (human.x, human.y) == human_finish:
+        print("You won!!!")
+        result = 'win'
+        going = False
+        (human.x, human.y) = human_start
+    elif (bot.x, bot.y) == bot_finish:
+        print("You lose!!!")
+        result = 'lose'
+        going = False
+        (bot.x, bot.y) = bot_start
 
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                flag_game = False
-            # передвижение
-            if event.type == pg.KEYDOWN:
-                # Поведение клавиш
-                key_pressed(event, game)
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            running = False
+        if event.type == pg.KEYDOWN:
+            if going:
+                key_pressed(event, human, bot)
 
-        # рисуем результат, если возволяет ширина экрана
-        game.draw_score()
+            # quit game
+            if event.key == pg.K_q:
+                running = False
+            # quit game
+            if event.key == pg.K_e:
+                going = False
+            # restart
+            if event.key == pg.K_r:
+                human_start, human_finish = generate_human_start_finish(cols, rows)
+                bot_start, bot_finish = generate_bot_start_finish(cols, rows, human_start, human_finish)
+                board, human, bot = create_game(sc, human_start, human_finish, bot_start, bot_finish)
+                going = True
 
-        game.draw_player()
-        game.tick()
+
+    board.draw_cells()
+    human.draw_start_finish()
+
+    if going:
+        bot.draw_start_finish()
+        bot.draw_player()
+        human.draw_player()
     else:
-        if game.lost:
-            game.show_path()
+        if result == 'lose':
+            human.draw_path()
 
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                flag_game = False
-
-            if event.type == pg.KEYDOWN:
-                # Начать новую игру
-                if event.key == pg.K_r:
-                    game = Game(width, height, window, width_window, height_window)
-                    game.start_game()
     pg.display.update()
-
-pg.quit()
+    clock.tick(FPS)
