@@ -29,8 +29,8 @@
 игру либо выходит полностью из программы.
 
 #### Ссылки на диаграммы:
-[Ссылка на UML Activity diagram 1](/doc/UML_AD_1.drawio.png)
-[Ссылка на UML Activity diagram 2](/doc/UML_AD_2.drawio.png)
-[Ссылка на UML Activity diagram 3](/doc/UML_AD_3.drawio.png)
+1. [Ссылка на UML Activity diagram 1](/doc/UML_AD_1.drawio.png)
+2. [Ссылка на UML Activity diagram 2](/doc/UML_AD_2.drawio.png)
+3. [Ссылка на UML Activity diagram 3](/doc/UML_AD_3.drawio.png)
 
 [Ссылка на UML Class diagram](UML_CD.drawio.png)
