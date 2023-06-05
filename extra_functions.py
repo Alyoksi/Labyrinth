@@ -41,9 +41,9 @@ def generate_bot_start_finish(cols, rows, human_start, human_finish):
 def input_diff():
     """menu for choosing difficulty"""
     print('''Выберите сложность:
-    1. Легкая (Ширина клетка - 150)
-    2. Нормальная (Ширина клетка - 100)
-    3. Сложная (Ширина клетка - 50) ''')
+    1. Легкая (Ширина клетки - 150)
+    2. Нормальная (Ширина клетки - 100)
+    3. Сложная (Ширина клетки - 50) ''')
 
     diff = input("Введите только номер сложности: ")
     while not (diff.isdigit()) or not (1 <= int(diff) <= 3):
