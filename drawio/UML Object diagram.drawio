@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" modified="2023-06-05T03:11:00.981Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0" etag="WW6KENL-j8FHYcs4UMZE" version="21.3.7" type="device">
+  <diagram name="Page-1" id="c4acf3e9-155e-7222-9cf6-157b1a14988f">
+    <mxGraphModel dx="1195" dy="605" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="17acba5748e5396b-20" value="&lt;font color=&quot;#ffffff&quot;&gt;Массив объектов: Cell&lt;/font&gt;" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=default;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="343" y="430" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="17acba5748e5396b-21" value="&lt;div&gt;screen=screen&lt;/div&gt;&lt;div&gt;x=col&lt;/div&gt;&lt;div&gt;y=row&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#36393d;fillColor=#eeeeee;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;" parent="17acba5748e5396b-20" vertex="1">
+          <mxGeometry y="26" width="160" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;endArrow=none;endFill=0;" edge="1" parent="1" source="m4CWVcBC8u5SihhJO7Pz-4" target="17acba5748e5396b-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-4" value="&lt;font color=&quot;#FFFFFF&quot;&gt;board:Board&lt;/font&gt;" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=default;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="343" y="330" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-5" value="&lt;div&gt;screen=sc&lt;/div&gt;" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;" vertex="1" parent="m4CWVcBC8u5SihhJO7Pz-4">
+          <mxGeometry y="26" width="160" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-9" value="&lt;font color=&quot;#FFFFFF&quot;&gt;human:Human&lt;/font&gt;" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=default;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="83" y="550" width="260" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-10" value="&lt;div style=&quot;font-family: &amp;quot;FiraCode Nerd Font Mono&amp;quot;, monospace; font-size: 12pt;&quot;&gt;&lt;font&gt;x=human_start[0]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-family: &amp;quot;FiraCode Nerd Font Mono&amp;quot;, monospace; font-size: 12pt;&quot;&gt;&lt;font&gt;y=human_start[1]&lt;br&gt;fx=human_finish[0]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-family: &amp;quot;FiraCode Nerd Font Mono&amp;quot;, monospace; font-size: 12pt;&quot;&gt;&lt;font&gt;fy=human_finish[1]&lt;br&gt;&lt;br&gt;screen=sc&lt;br&gt;color=BLUE&lt;br&gt;start_color=GREEN &lt;br&gt;finish_color=RED&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;labelBackgroundColor=none;" vertex="1" parent="m4CWVcBC8u5SihhJO7Pz-9">
+          <mxGeometry y="26" width="260" height="194" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-14" value="&lt;font color=&quot;#FFFFFF&quot;&gt;bot:Bot&lt;/font&gt;" style="swimlane;html=1;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=default;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=10;align=center;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="508" y="550" width="260" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-15" value="&lt;div style=&quot;font-family: &amp;quot;FiraCode Nerd Font Mono&amp;quot;, monospace; font-size: 12pt;&quot;&gt;&lt;font&gt;x=bot_start[0]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-family: &amp;quot;FiraCode Nerd Font Mono&amp;quot;, monospace; font-size: 12pt;&quot;&gt;&lt;font&gt;y=bot_start[1]&lt;br&gt;fx=bot_finish[0]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-family: &amp;quot;FiraCode Nerd Font Mono&amp;quot;, monospace; font-size: 12pt;&quot;&gt;&lt;font&gt;fy=bot_finish[1]&lt;br&gt;&lt;br&gt;screen=sc&lt;br&gt;color=BLACK&lt;br&gt;start_color=GREY &lt;br&gt;finish_color=CREY&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;labelBackgroundColor=none;" vertex="1" parent="m4CWVcBC8u5SihhJO7Pz-14">
+          <mxGeometry y="26" width="260" height="194" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="17acba5748e5396b-21" target="m4CWVcBC8u5SihhJO7Pz-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m4CWVcBC8u5SihhJO7Pz-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="17acba5748e5396b-21" target="m4CWVcBC8u5SihhJO7Pz-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -38,3 +38,4 @@
 
 #### Структурные модели программного проекта
 1. [Ссылка на UML Class diagram](/doc/UML%20CD.drawio.png)
+2. [Ссылка на UML Object diagram](/doc/UML%20Object%20diagram.drawio.png)
