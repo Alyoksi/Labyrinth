@@ -154,7 +154,7 @@ class Human(Player):
             self.y += 1
 
 class Bot(Player):
-    def step_next(self):
+    def stepNext(self):
         if self.path:
             if choice([True, True, False]):
                 self.x, self.y = self.path[-1]

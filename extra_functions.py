@@ -57,13 +57,13 @@ def input_diff():
 def key_pressed(event, human, bot):
     if event.key == pg.K_RIGHT or event.key == pg.K_d:
         human.moveRIGHT()
-        bot.step_next()
+        bot.stepNext()
     if event.key == pg.K_LEFT or event.key == pg.K_a:
         human.moveLEFT()
-        bot.step_next()
+        bot.stepNext()
     if event.key == pg.K_UP or event.key == pg.K_w:
         human.moveUP()
-        bot.step_next()
+        bot.stepNext()
     if event.key == pg.K_DOWN or event.key == pg.K_s:
         human.moveDOWN()
-        bot.step_next()
+        bot.stepNext()
