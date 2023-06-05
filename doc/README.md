@@ -30,15 +30,15 @@
 4. Пользователь проигрывает или сдается - программы показывает правильный путь 
 
 #### Функциональные модели программного проекта
-1. [Ссылка на UML Activity diagram 1](/doc/UML_AD_1.drawio.png)
-2. [Ссылка на UML Activity diagram 2](/doc/UML_AD_2.drawio.png)
-3. [Ссылка на UML Activity diagram 3](/doc/UML_AD_3.drawio.png)
-4. [Ссылка на UML State Machine diagram](/doc/UML%20State%20Machine.drawio.png)
-5. [Ссылка на UML Sequence diagram](/doc/UML%20Sequence%20diagram.drawio.png)
+1. [UML Activity diagram 1](/doc/UML_AD_1.drawio.png)
+2. [UML Activity diagram 2](/doc/UML_AD_2.drawio.png)
+3. [UML Activity diagram 3](/doc/UML_AD_3.drawio.png)
+4. [UML State Machine diagram](/doc/UML%20State%20Machine.drawio.png)
+5. [UML Sequence diagram](/doc/UML%20Sequence%20diagram.drawio.png)
 
 #### Структурные модели программного проекта
-1. [Ссылка на UML Class diagram](/doc/UML%20CD.drawio.png)
-2. [Ссылка на UML Object diagram](/doc/UML%20Object%20diagram.drawio.png)
+1. [UML Class diagram](/doc/UML%20CD.drawio.png)
+2. [UML Object diagram](/doc/UML%20Object%20diagram.drawio.png)
 
 #### Реализация
 Изначально планировалась сделать игру следующим образом: есть лабиринт и игрок, помещенный в эту лабиринт. У игрока есть 
