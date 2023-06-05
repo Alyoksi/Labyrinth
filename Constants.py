@@ -1,6 +1,6 @@
 import pygame as pg
 
-
+# resolution
 RES = WIDTH, HEIGHT = 1202, 902
 FPS = 60
 

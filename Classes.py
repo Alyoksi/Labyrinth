@@ -2,12 +2,11 @@ from random import choice
 from Constants import *
 from extra_functions import input_diff
 
-# Клетки
+# Array of cells
 grid_cells = []
 
-# размеры, количество клеток
-TILE = input_diff()
-rows, cols = HEIGHT // TILE, WIDTH // TILE
+TILE = input_diff()     # cell size
+rows, cols = HEIGHT // TILE, WIDTH // TILE  # width, height
 
 class Board:
 
@@ -15,27 +14,33 @@ class Board:
         global grid_cells
 
         self.screen = screen
-
-
+        # creating default field
         grid_cells = [Cell(screen, col, row) for row in range(rows) for col in range(cols)]
 
     def generate_labyrinth(self):
+        """function that changes array grid_cells so that forms labyrinth"""
+
         current_cell = grid_cells[0]
         current_cell.visited = True
         cnt_visited = 1
         stack = []
+        # while not all cells were visited
         while cnt_visited != rows * cols:
+            # take next cell
             next_cell = current_cell.check_neighbors()
+            # if we can take next cell
             if next_cell:
                 next_cell.visited = True
                 cnt_visited += 1
                 stack.append(current_cell)
                 remove_walls(current_cell, next_cell)
                 current_cell = next_cell
+            # taking one step back
             elif stack:
                 current_cell = stack.pop()
 
     def draw_cells(self):
+        """drawing all cells with borders from grid_cell array"""
         [cell.draw() for cell in grid_cells]
 
 class Cell:
@@ -47,10 +52,13 @@ class Cell:
         self.screen = screen
 
     def draw(self):
+        # convert to field coords
         x, y = self.x * TILE, self.y * TILE
+        # drawing cell
         if self.visited:
             pg.draw.rect(self.screen, BACKGROUND, (x, y, TILE, TILE))
 
+        # drawing walls
         if self.walls['top']:
             pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x+TILE, y), 2)
         if self.walls['right']:
@@ -61,6 +69,7 @@ class Cell:
             pg.draw.line(self.screen, pg.Color('darkorange'), (x, y+TILE), (x+TILE, y+TILE), 2)
 
     def check_neighbors(self):
+        """function return array of adjoing cells if there are any, otherwise False"""
         x, y = self.x, self.y
         neighbors = []
         top   =  check_cell(x, y - 1)
@@ -81,32 +90,42 @@ class Cell:
 class Player:
 
     def __init__(self, screen, base_color, start_color, finish_color, x, y, fx, fy):
+        # player coords
         self.x = x
         self.y = y
 
+        # start coords
         self.sx = x*TILE
         self.sy = y*TILE
-
+        # finish coords
         self.fx= fx
         self.fy = fy
 
         self.screen = screen
+        # player color
         self.color = base_color
+        # start point color
         self.start_color = start_color
+        # finish point color
         self.finish_color = finish_color
+        # array of points that create path from start to finish
         self.path = []
         self.stack = []
 
         self.find_path_to_finish(self.x, self.y)
+        # for convinience: using array as stack
         self.path.reverse()
 
     def find_path_to_finish(self, x, y, px=-1, py=-1):
+        # if not start point
         if x != self.x or y != self.y:
             self.stack.append((x, y))
+        # if we met finish - end
         if x == self.fx and y == self.fy:
             self.path = self.stack[:]
             return
 
+        # go to any possible direction
         if y-1 != py and check_cell(x, y-1):
             if not check_cell(x, y).walls['top']:
                 self.find_path_to_finish(x, y-1, x, y)
@@ -123,10 +142,12 @@ class Player:
         self.stack.pop()
 
     def draw_start_finish(self):
+        """drawing start and finish cells"""
         pg.draw.rect(self.screen, self.start_color, (self.sx + 2, self.sy + 2, TILE - 2, TILE - 2))
         pg.draw.rect(self.screen, self.finish_color, (self.fx * TILE + 2, self.fy * TILE + 2, TILE - 2, TILE - 2))
 
     def draw_path(self):
+        """drawing path from start to finish"""
         for a, b in self.path:
             x, y = a * TILE, b * TILE
             pg.draw.circle(self.screen, self.color, (x + TILE // 2, y + TILE // 2), (TILE - 10) // 4, 2)
@@ -136,31 +157,31 @@ class Player:
         pg.draw.circle(self.screen, self.color, (x+TILE//2, y+TILE//2), (TILE-10) // 2)
 
 class Human(Player):
-
+    # Human movement
     def moveUP(self):
         if not check_cell(self.x, self.y).walls['top']:
             self.y -= 1
-
     def moveRIGHT(self):
         if not check_cell(self.x, self.y).walls['right']:
             self.x += 1
-
     def moveLEFT(self):
         if not check_cell(self.x, self.y).walls['left']:
             self.x -= 1
-
     def moveDOWN(self):
         if not check_cell(self.x, self.y).walls['bottom']:
             self.y += 1
 
 class Bot(Player):
+    # bot movement
     def stepNext(self):
         if self.path:
+            # for 1 human move bot has 2/3 chance to step forward
             if choice([True, True, False]):
                 self.x, self.y = self.path[-1]
                 self.path.pop()
 
 def remove_walls(current, next):
+    """removing wall between two adjoined cells"""
     dx = current.x - next.x
     if dx == 1:
         current.walls['left'] = False
@@ -177,11 +198,12 @@ def remove_walls(current, next):
         next.walls['top'] = False
 
 def check_cell(x, y):
-
+    """return cell object if posible, False otherwise"""
     if x < 0 or x > cols - 1 or y < 0 or y > rows - 1:
         return False
     return grid_cells[x + y*cols]
 
+# creating instances of classes
 def create_game(sc, human_start, human_finish, bot_start, bot_finish):
     board = Board(sc)
     board.generate_labyrinth()
