@@ -1,7 +1,8 @@
 import pygame as pg
 
 # resolution
-RES = WIDTH, HEIGHT = 1202, 902
+RES = WIDTH, HEIGHT = 1203, 903
+BORDERS=3
 FPS = 60
 
 # COLORS
@@ -12,5 +13,13 @@ BLACK = pg.Color("black")
 WHITE = pg.Color("white")
 BLUE = pg.Color("blue")
 RED = pg.Color("red")
-COOl = (40, 40, 90)
+YELLOW = pg.Color("yellow")
+PURPLE = (150, 50, 255)
+COOL = (40, 40, 90)
 BACKGROUND = WHITE
+
+HUMANCOLOR = BLUE
+BOTCOLOR = PURPLE
+HUMANSTFI = (0, 200, 0)
+BOTSTFI = (255, 50, 50)
+

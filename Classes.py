@@ -60,13 +60,13 @@ class Cell:
 
         # drawing walls
         if self.walls['top']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x+TILE, y), 2)
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x+TILE, y), BORDERS)
         if self.walls['right']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x+TILE, y), (x+TILE, y+TILE), 2)
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x+TILE, y), (x+TILE, y+TILE), BORDERS)
         if self.walls['left']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x, y+TILE), 2)
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x, y+TILE), BORDERS)
         if self.walls['bottom']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y+TILE), (x+TILE, y+TILE), 2)
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y+TILE), (x+TILE, y+TILE), BORDERS)
 
     def check_neighbors(self):
         """function return array of adjoing cells if there are any, otherwise False"""
@@ -95,8 +95,8 @@ class Player:
         self.y = y
 
         # start coords
-        self.sx = x*TILE
-        self.sy = y*TILE
+        self.sx = x
+        self.sy = y
         # finish coords
         self.fx= fx
         self.fy = fy
@@ -143,35 +143,43 @@ class Player:
 
     def draw_start_finish(self):
         """drawing start and finish cells"""
-        pg.draw.rect(self.screen, self.start_color, (self.sx + 2, self.sy + 2, TILE - 2, TILE - 2))
-        pg.draw.rect(self.screen, self.finish_color, (self.fx * TILE + 2, self.fy * TILE + 2, TILE - 2, TILE - 2))
+        pg.draw.rect(self.screen, self.start_color, (self.sx*TILE + BORDERS, self.sy * TILE+ BORDERS,
+                                                     TILE - BORDERS, TILE - BORDERS))
+        
+        pg.draw.rect(self.screen, self.finish_color, (self.fx * TILE + BORDERS, self.fy * TILE + BORDERS,
+                                                      TILE - BORDERS, TILE - BORDERS))
 
     def draw_path(self):
         """drawing path from start to finish"""
         for a, b in self.path:
             x, y = a * TILE, b * TILE
-            pg.draw.circle(self.screen, self.color, (x + TILE // 2, y + TILE // 2), (TILE - 10) // 4, 2)
+            pg.draw.circle(self.screen, self.color, (x + TILE // 2, y + TILE // 2), (TILE - 10) // 4, 3)
 
     def draw_player(self):
         x, y = self.x * TILE, self.y * TILE
         pg.draw.circle(self.screen, self.color, (x+TILE//2, y+TILE//2), (TILE-10) // 2)
 
 class Human(Player):
+    """A class describing user behavior"""
     # Human movement
     def moveUP(self):
         if not check_cell(self.x, self.y).walls['top']:
             self.y -= 1
+
     def moveRIGHT(self):
         if not check_cell(self.x, self.y).walls['right']:
             self.x += 1
+
     def moveLEFT(self):
         if not check_cell(self.x, self.y).walls['left']:
             self.x -= 1
+
     def moveDOWN(self):
         if not check_cell(self.x, self.y).walls['bottom']:
             self.y += 1
 
 class Bot(Player):
+    """A class describing user behavior"""
     # bot movement
     def stepNext(self):
         if self.path:
@@ -198,7 +206,7 @@ def remove_walls(current, next):
         next.walls['top'] = False
 
 def check_cell(x, y):
-    """return cell object if posible, False otherwise"""
+    """return cell object in (x,y) coords in main matrix if posible, False otherwise"""
     if x < 0 or x > cols - 1 or y < 0 or y > rows - 1:
         return False
     return grid_cells[x + y*cols]
@@ -209,8 +217,8 @@ def create_game(sc, human_start, human_finish, bot_start, bot_finish):
     board.generate_labyrinth()
 
     # Создаем игрока-человека
-    human = Human(sc, BLUE, GREEN, RED, human_start[0], human_start[1], human_finish[0], human_finish[1])
+    human = Human(sc, HUMANCOLOR, HUMANSTFI, HUMANSTFI, human_start[0], human_start[1], human_finish[0], human_finish[1])
     # Создаем игрока-бота
-    bot = Bot(sc, BLACK, GREY, GREY, bot_start[0], bot_start[1], bot_finish[0], bot_finish[1])
+    bot = Bot(sc, BOTCOLOR, BOTSTFI, BOTSTFI, bot_start[0], bot_start[1], bot_finish[0], bot_finish[1])
 
     return board, human, bot
