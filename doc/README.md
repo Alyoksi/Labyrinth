@@ -34,7 +34,7 @@
 2. [Ссылка на UML Activity diagram 2](/doc/UML_AD_2.drawio.png)
 3. [Ссылка на UML Activity diagram 3](/doc/UML_AD_3.drawio.png)
 4. [Ссылка на UML State Machine diagram](/doc/UML%20State%20Machine.drawio.png)
-5. [Ссылка на UML Sequence diagram](/doc/UML%20State%20Machine.drawio.png)
+5. [Ссылка на UML Sequence diagram](/doc/UML%20Sequence%20diagram.drawio.png)
 
 #### Структурные модели программного проекта
 1. [Ссылка на UML Class diagram](/doc/UML%20CD.drawio.png)
