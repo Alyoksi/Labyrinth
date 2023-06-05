@@ -29,9 +29,12 @@
 игру либо выходит полностью из программы.
 4. Пользователь проигрывает или сдается - программы показывает правильный путь 
 
-#### Ссылки на диаграммы:
+#### Функциональные модели программного проекта
 1. [Ссылка на UML Activity diagram 1](/doc/UML_AD_1.drawio.png)
 2. [Ссылка на UML Activity diagram 2](/doc/UML_AD_2.drawio.png)
 3. [Ссылка на UML Activity diagram 3](/doc/UML_AD_3.drawio.png)
+4. [Ссылка на UML State Machine diagram](/doc/UML%20State%20Machine.drawio.png)
+5. [Ссылка на UML Sequence diagram](/doc/UML%20State%20Machine.drawio.png)
 
-[Ссылка на UML Class diagram](/doc/UML%20CD.drawio.png)
+#### Структурные модели программного проекта
+1. [Ссылка на UML Class diagram](/doc/UML%20CD.drawio.png)
