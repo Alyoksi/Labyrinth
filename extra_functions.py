@@ -38,25 +38,6 @@ def generate_bot_start_finish(cols, rows, human_start, human_finish):
 
     return bot_start, bot_finish
 
-def input_diff():
-    """menu for choosing difficulty"""
-    print('''Выберите сложность:
-    1. Легкая (Ширина клетки - 150)
-    2. Нормальная (Ширина клетки - 100)
-    3. Сложная (Ширина клетки - 50) ''')
-
-    diff = input("Введите только номер сложности: ")
-    while not (diff.isdigit()) or not (1 <= int(diff) <= 3):
-        print("Сложность - целое число от 1 от 3!")
-        diff = input("Введите только номер сложности: ")
-    diff = int(diff)
-    if diff == 1:
-        return 150
-    elif diff == 2:
-        return 100
-    elif diff == 3:
-        return 50
-
 def key_pressed(event, human, bot):
     """function that reacts on some keys..."""
     if event.key == pg.K_RIGHT or event.key == pg.K_d:

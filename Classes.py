@@ -1,12 +1,8 @@
 from random import choice
 from Constants import *
-from extra_functions import input_diff
 
 # Array of cells
 grid_cells = []
-
-TILE = input_diff()     # cell size
-rows, cols = HEIGHT // TILE, WIDTH // TILE  # width, height
 
 class Board:
 
@@ -51,23 +47,6 @@ class Cell:
         self.visited = False
         self.screen = screen
 
-    def draw(self):
-        # convert to field coords
-        x, y = self.x * TILE, self.y * TILE
-        # drawing cell
-        if self.visited:
-            pg.draw.rect(self.screen, BACKGROUND, (x, y, TILE, TILE))
-
-        # drawing walls
-        if self.walls['top']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x+TILE, y), BORDERS)
-        if self.walls['right']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x+TILE, y), (x+TILE, y+TILE), BORDERS)
-        if self.walls['left']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x, y+TILE), BORDERS)
-        if self.walls['bottom']:
-            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y+TILE), (x+TILE, y+TILE), BORDERS)
-
     def check_neighbors(self):
         """function return array of adjoing cells if there are any, otherwise False"""
         x, y = self.x, self.y
@@ -86,6 +65,24 @@ class Cell:
         if bottom and not bottom.visited:
             neighbors.append(bottom)
         return choice(neighbors) if neighbors else False
+
+    def draw(self):
+        # convert to field coords
+        x, y = self.x * TILE, self.y * TILE
+        # drawing cell
+        if self.visited:
+            pg.draw.rect(self.screen, BACKGROUND, (x, y, TILE, TILE))
+
+        # drawing walls
+        if self.walls['top']:
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x+TILE, y), BORDERS)
+        if self.walls['right']:
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x+TILE, y), (x+TILE, y+TILE), BORDERS)
+        if self.walls['left']:
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y), (x, y+TILE), BORDERS)
+        if self.walls['bottom']:
+            pg.draw.line(self.screen, pg.Color('darkorange'), (x, y+TILE), (x+TILE, y+TILE), BORDERS)
+
 
 class Player:
 
@@ -112,17 +109,13 @@ class Player:
         self.path = []
         self.stack = []
 
-        self.find_path_to_finish(self.x, self.y)
-        # for convinience: using array as stack
-        self.path.reverse()
-
     def find_path_to_finish(self, x, y, px=-1, py=-1):
         # if not start point
         if x != self.x or y != self.y:
             self.stack.append((x, y))
         # if we met finish - end
         if x == self.fx and y == self.fy:
-            self.path = self.stack[:]
+            self.path = self.stack[::-1]
             return
 
         # go to any possible direction
@@ -218,7 +211,9 @@ def create_game(sc, human_start, human_finish, bot_start, bot_finish):
 
     # Создаем игрока-человека
     human = Human(sc, HUMANCOLOR, HUMANSTFI, HUMANSTFI, human_start[0], human_start[1], human_finish[0], human_finish[1])
+    human.find_path_to_finish(human_start[0], human_start[1])
     # Создаем игрока-бота
     bot = Bot(sc, BOTCOLOR, BOTSTFI, BOTSTFI, bot_start[0], bot_start[1], bot_finish[0], bot_finish[1])
+    bot.find_path_to_finish(bot_start[0], bot_start[1])
 
     return board, human, bot

@@ -1,7 +1,10 @@
 import pygame as pg
 
 # resolution
+TILE = 50
 RES = WIDTH, HEIGHT = 1203, 903
+rows, cols = HEIGHT // TILE, WIDTH // TILE  # width, height
+
 BORDERS=3
 FPS = 60
 
