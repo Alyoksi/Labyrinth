@@ -127,3 +127,47 @@ class TestTest:
         assert c2.walls["left"]
         assert c2.walls["left"]
 
+    def test_BotStep(self):
+        Board(sc)
+        bot = Bot(sc, BOTCOLOR, BOTSTFI, BOTSTFI, 0, 0, 2, 2)
+        assert bot.x == 0
+        assert bot.y == 0
+
+        Classes.grid_cells[0].walls["right"] = False
+        Classes.grid_cells[1].walls["left"] = False
+        bot.path.append((1, 0))
+        bot.stepNext()
+        if len(bot.path) == 1:
+            assert bot.x == 0
+            assert bot.y == 0
+        else:
+            assert bot.x == 1
+            assert bot.y == 0
+
+    def test_HumanStep(self):
+        Board(sc)
+        human = Human(sc, BOTCOLOR, BOTSTFI, BOTSTFI, 0, 0, 2, 2)
+        assert human.x == 0
+        assert human.y == 0
+
+        Classes.grid_cells[0].walls["right"] = False
+        Classes.grid_cells[1].walls["left"] = False
+
+        human.moveRIGHT()
+        assert human.x == 1
+        assert human.y == 0
+
+        human.moveLEFT()
+        assert human.x == 0
+        assert human.y == 0
+
+        Classes.grid_cells[0].walls["bottom"] = False
+        Classes.grid_cells[cols].walls["top"] = False
+
+        human.moveDOWN()
+        assert human.x == 0
+        assert human.y == 1
+
+        human.moveUP()
+        assert human.x == 0
+        assert human.y == 0
