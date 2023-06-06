@@ -12,7 +12,7 @@ sc = pg.display.set_mode((10, 10))
 
 class TestTest:
 
-    def test_checkClasses(self):
+    def test_check_classes(self):
         board = Board(sc)
         assert isinstance(board, Board)
 
@@ -25,13 +25,13 @@ class TestTest:
         bot = Bot(sc, HUMANCOLOR, HUMANSTFI, HUMANSTFI, 0, 0, 1, 1)
         assert isinstance(bot, Bot)
 
-    def test_checkCreateGame(self):
+    def test_check_create_game(self):
         board, human, bot = create_game(sc, (0, 0), (1, 1), (2, 2), (3, 3))
         assert isinstance(board, Board)
         assert isinstance(human, Human)
         assert isinstance(bot, Bot)
 
-    def test_checkGenerateStart(self):
+    def test_check_generate_start(self):
         s1, s2 = generate_start_point(10, 10)
         assert 0 <= s1 <= 10
         assert 0 <= s2 <= 10
@@ -40,7 +40,7 @@ class TestTest:
         assert 0 <= s1 <= 20
         assert 0 <= s2 <= 150
 
-    def test_checkGenerateFinish(self):
+    def test_check_generate_finish(self):
         s1, s2 = generate_start_point(10, 10)
         f1, f2 = generate_finish_point(10, 10, (s1, s2))
         assert 9-s1 == f1
@@ -51,7 +51,7 @@ class TestTest:
         assert 19-s1 == f1
         assert 149-s2 == f2
 
-    def test_checkHumanStartFinish(self):
+    def test_check_human_start_finish(self):
         hs, hf = generate_human_start_finish(10, 10)
         assert 0 <= hs[0] <= 10
         assert 0 <= hs[1] <= 10
@@ -66,7 +66,7 @@ class TestTest:
         assert 19-hs[0] == hf[0]
         assert 149-hs[1] == hf[1]
 
-    def test_checkBotStartFinish(self):
+    def test_check_bot_start_finish(self):
         hs, hf = generate_human_start_finish(10, 10)
         bs, bf = generate_bot_start_finish(10, 10, hs, hf)
 
@@ -89,7 +89,7 @@ class TestTest:
         assert 0 <= bf[0] <= 20
         assert 0 <= bf[1] <= 150
 
-    def test_removewalls(self):
+    def test_remove_walls(self):
         c1 = Cell(sc, 0, 0)
         c2 = Cell(sc, 0, 1)
         remove_walls(c1, c2)
@@ -127,7 +127,7 @@ class TestTest:
         assert c2.walls["left"]
         assert c2.walls["left"]
 
-    def test_BotStep(self):
+    def test_bot_step(self):
         Board(sc)
         bot = Bot(sc, BOTCOLOR, BOTSTFI, BOTSTFI, 0, 0, 2, 2)
         assert bot.x == 0
@@ -144,7 +144,7 @@ class TestTest:
             assert bot.x == 1
             assert bot.y == 0
 
-    def test_HumanStep(self):
+    def test_human_step(self):
         Board(sc)
         human = Human(sc, BOTCOLOR, BOTSTFI, BOTSTFI, 0, 0, 2, 2)
         assert human.x == 0
