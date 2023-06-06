@@ -1,5 +1,5 @@
 import random
-from Constants import *
+from constants import *
 
 def generate_start_point(cols, rows):
     """Функция выбора точки начала лабиринта"""

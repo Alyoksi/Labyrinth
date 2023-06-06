@@ -1,5 +1,5 @@
 from extra_functions import *
-from Classes import *
+from classes import *
 
 pg.init()
 sc = pg.display.set_mode(RES)

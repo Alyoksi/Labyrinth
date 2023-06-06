@@ -1,5 +1,5 @@
 from random import choice
-from Constants import *
+from constants import *
 
 # Array of cells
 grid_cells = []
@@ -83,7 +83,6 @@ class Cell:
         if self.walls['bottom']:
             pg.draw.line(self.screen, pg.Color('darkorange'), (x, y+TILE), (x+TILE, y+TILE), BORDERS)
 
-
 class Player:
 
     def __init__(self, screen, base_color, start_color, finish_color, x, y, fx, fy):
@@ -109,7 +108,7 @@ class Player:
         self.path = []
         self.stack = []
 
-    def find_path_to_finish(self, x, y, px=-1, py=-1):
+    def find_path(self, x, y, px=-1, py=-1):
         # if not start point
         if x != self.x or y != self.y:
             self.stack.append((x, y))
@@ -121,16 +120,16 @@ class Player:
         # go to any possible direction
         if y-1 != py and check_cell(x, y-1):
             if not check_cell(x, y).walls['top']:
-                self.find_path_to_finish(x, y-1, x, y)
+                self.find_path(x, y - 1, x, y)
         if not check_cell(x, y).walls['bottom']:
             if y+1 != py and check_cell(x, y+1):
-                self.find_path_to_finish(x, y+1, x, y)
+                self.find_path(x, y + 1, x, y)
         if not check_cell(x, y).walls['right']:
             if x+1 != px and check_cell(x+1, y):
-                self.find_path_to_finish(x+1, y, x, y)
+                self.find_path(x + 1, y, x, y)
         if not check_cell(x, y).walls['left']:
             if x-1 != px and check_cell(x-1, y):
-                self.find_path_to_finish(x-1, y, x, y)
+                self.find_path(x - 1, y, x, y)
 
         self.stack.pop()
 
@@ -211,9 +210,9 @@ def create_game(sc, human_start, human_finish, bot_start, bot_finish):
 
     # Создаем игрока-человека
     human = Human(sc, HUMANCOLOR, HUMANSTFI, HUMANSTFI, human_start[0], human_start[1], human_finish[0], human_finish[1])
-    human.find_path_to_finish(human_start[0], human_start[1])
+    human.find_path(human_start[0], human_start[1])
     # Создаем игрока-бота
     bot = Bot(sc, BOTCOLOR, BOTSTFI, BOTSTFI, bot_start[0], bot_start[1], bot_finish[0], bot_finish[1])
-    bot.find_path_to_finish(bot_start[0], bot_start[1])
+    bot.find_path(bot_start[0], bot_start[1])
 
     return board, human, bot

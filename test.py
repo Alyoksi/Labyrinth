@@ -1,9 +1,9 @@
 import pytest
 
-import Classes
-from Classes import *
+import classes
+from classes import *
 import pygame as pg
-from Constants import *
+from constants import *
 from extra_functions import *
 
 pg.init()
@@ -133,8 +133,8 @@ class TestTest:
         assert bot.x == 0
         assert bot.y == 0
 
-        Classes.grid_cells[0].walls["right"] = False
-        Classes.grid_cells[1].walls["left"] = False
+        classes.grid_cells[0].walls["right"] = False
+        classes.grid_cells[1].walls["left"] = False
         bot.path.append((1, 0))
         bot.stepNext()
         if len(bot.path) == 1:
@@ -150,8 +150,8 @@ class TestTest:
         assert human.x == 0
         assert human.y == 0
 
-        Classes.grid_cells[0].walls["right"] = False
-        Classes.grid_cells[1].walls["left"] = False
+        classes.grid_cells[0].walls["right"] = False
+        classes.grid_cells[1].walls["left"] = False
 
         human.moveRIGHT()
         assert human.x == 1
@@ -161,8 +161,8 @@ class TestTest:
         assert human.x == 0
         assert human.y == 0
 
-        Classes.grid_cells[0].walls["bottom"] = False
-        Classes.grid_cells[cols].walls["top"] = False
+        classes.grid_cells[0].walls["bottom"] = False
+        classes.grid_cells[cols].walls["top"] = False
 
         human.moveDOWN()
         assert human.x == 0
