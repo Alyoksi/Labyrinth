@@ -18,6 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}'
+
   coveralls:
     name: coveralls
     runs-on: ubuntu-latest
@@ -31,6 +32,7 @@ jobs:
       - name: install requirements
         run: |
           pip install --upgrade pip
+          pip install pygame
           pip install pytest
           pip install coveralls
       - name: run tests
